@@ -3,13 +3,13 @@ import africastalking as aft
 import os
 
 app = Flask(__name__)
-username = ""
-api_key = ""
+username = "sandbox"
+api_key = "3f1bc65b1c29fa85a02c1f99ad4bcc52c1c1c2178aadfbb1d24e8510c94c52e6"
 aft.initialize(username, api_key)
 sms = aft.SMS
+response = ""
 
 @app.route('/', methods=['POST', 'GET'])
-
 def ussd_callback():
     global response
     session_id = request.values.get("sessionId", None)
