@@ -1,2 +1,4 @@
 flask
 africastalking
+flask-sqlalchemy
+psycopg2

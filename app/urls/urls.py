@@ -1,16 +1,12 @@
-from flask import Flask, request
-import africastalking as aft
-import os
+from flask import request
+from app import app, aft
 
-app = Flask(__name__)
-username = "sandbox"
-api_key = "3f1bc65b1c29fa85a02c1f99ad4bcc52c1c1c2178aadfbb1d24e8510c94c52e6"
-aft.initialize(username, api_key)
-sms = aft.SMS
 response = ""
 
-@app.route('/', methods=['POST', 'GET'])
+
+@app.route("/", methods=["POST", "GET"])
 def ussd_callback():
+    sms = aft.SMS
     global response
     session_id = request.values.get("sessionId", None)
     service_code = request.values.get("serviceCode", None)
@@ -19,31 +15,33 @@ def ussd_callback():
     sms_phone_number = []
     sms_phone_number.append(phone_number)
 
-    #ussd logic
+    # ussd logic
     if text == "":
-        #main menu
+        # main menu
         response = "CON What would you like to do?\n"
         response += "1. Check account details\n"
         response += "2. Check phone number\n"
         response += "3. Send me a cool message"
     elif text == "1":
-        #sub menu 1
+        # sub menu 1
         response = "CON What would you like to check on your account?\n"
         response += "1. Account number"
         response += "2. Account balance"
     elif text == "2":
-        #sub menu 1
+        # sub menu 1
         response = "END Your phone number is {}".format(phone_number)
     elif text == "3":
         try:
-            #sending the sms
-            sms_response = sms.send("Thank you for going through this tutorial", sms_phone_number)
+            # sending the sms
+            sms_response = sms.send(
+                "Thank you for going through this tutorial", sms_phone_number
+            )
             print(sms_response)
         except Exception as e:
-            #show us what went wrong
+            # show us what went wrong
             print(f"Houston, we have a problem: {e}")
     elif text == "1*1":
-        #ussd menus are split using *
+        # ussd menus are split using *
         account_number = "1243324376742"
         response = "END Your account number is {}".format(account_number)
     elif text == "1*2":
@@ -53,6 +51,3 @@ def ussd_callback():
         response = "END Invalid input. Try again."
 
     return response
-
-if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=os.environ.get("PORT"))
