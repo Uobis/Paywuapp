@@ -2,3 +2,4 @@ flask
 africastalking
 flask-sqlalchemy
 psycopg2
+Flask-Migrate
