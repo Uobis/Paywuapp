@@ -64,6 +64,6 @@ def ussd_callback():
         account_balance = "100,000"
         response = "END Your account balance is USD {}".format(account_balance)
 
-    # print(text)
+    print(text)
 
     return response
