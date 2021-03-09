@@ -25,7 +25,8 @@ def ussd_callback():
     sms_phone_number.append(phone_number)
 
     if not text.find("*") == -1:
-        text = text.split("*")
+        pass
+        # text = text.split("*")
         # merchant_id = text[0]
         # amount = text[1]
         # refCode = text[2]
