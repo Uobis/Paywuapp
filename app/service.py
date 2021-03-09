@@ -2,7 +2,7 @@ import africastalking
 
 
 class PaywuGateway:
-    def __init__(self):
+    def __init__(self, app):
         self.user_name = app.config["AFRI_TALK_USER"]
         self.api_key = app.config["AFRI_TALK_KEY"]
 

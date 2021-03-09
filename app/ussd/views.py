@@ -1,12 +1,21 @@
-from flask import request
-from app import app, PaywuGateway
+from flask import request, make_response
+from . import ussd
+
+# from app import paywu_gateway
 
 response = ""
 
 
-@app.route("/", methods=["POST", "GET"])
+@ussd.route("/", methods=["POST", "GET"])
+def index():
+    response = make_response("END connection ok")
+    response.headers["Content-Type"] = "text/plain"
+    return response
+
+
+@ussd.route("/ussd/callback", methods=["POST", "GET"])
 def ussd_callback():
-    sms = PaywuGateway()
+    # sms = paywu_gateway
     global response
     session_id = request.values.get("sessionId", None)
     service_code = request.values.get("serviceCode", None)
@@ -30,16 +39,16 @@ def ussd_callback():
     elif text == "2":
         # sub menu 1
         response = "END Your phone number is {}".format(phone_number)
-    elif text == "3":
-        try:
-            # sending the sms
-            sms_response = sms.send_sms(
-                "Thank you for going through this tutorial", sms_phone_number
-            )
-            print(sms_response)
-        except Exception as e:
-            # show us what went wrong
-            print(f"Houston, we have a problem: {e}")
+    # elif text == "3":
+    #     try:
+    #         # sending the sms
+    #         sms_response = sms.send_sms(
+    #             "Thank you for going through this tutorial", sms_phone_number
+    #         )
+    #         print(sms_response)
+    #     except Exception as e:
+    #         # show us what went wrong
+    #         print(f"Houston, we have a problem: {e}")
     elif text == "1*1":
         # ussd menus are split using *
         account_number = "1243324376742"
@@ -47,7 +56,5 @@ def ussd_callback():
     elif text == "1*2":
         account_balance = "100,000"
         response = "END Your account balance is USD {}".format(account_balance)
-    else:
-        response = "END Invalid input. Try again."
 
     return response
