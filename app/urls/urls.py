@@ -1,12 +1,12 @@
 from flask import request
-from app import app, aft
+from app import app, PaywuGateway
 
 response = ""
 
 
 @app.route("/", methods=["POST", "GET"])
 def ussd_callback():
-    sms = aft.SMS
+    sms = PaywuGateway()
     global response
     session_id = request.values.get("sessionId", None)
     service_code = request.values.get("serviceCode", None)
@@ -33,7 +33,7 @@ def ussd_callback():
     elif text == "3":
         try:
             # sending the sms
-            sms_response = sms.send(
+            sms_response = sms.send_sms(
                 "Thank you for going through this tutorial", sms_phone_number
             )
             print(sms_response)
