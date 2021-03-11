@@ -17,6 +17,9 @@ class Config:
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     TEMPLATES_AUTO_RELOAD = True
 
+    CELERY_BROKER_URL = "redis://localhost:6379"
+    CELERY_RESULT_BACKEND = "redis://localhost:6379"
+
     AFRI_TALK_USER = None
     AFRI_TALK_KEY = None
 
