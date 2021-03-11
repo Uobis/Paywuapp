@@ -14,7 +14,7 @@ class Config:
 
     SECRET_KEY = b"\x1c\x92\x07\xc8\xea\xbbA\xa1\x04\xac\xa4I\xc5\x11\x9b\xb1"
     CSRF_ENABLED = True
-    SQLALCHEMY_DATABASE_URI = "postgres://paywuadmin:paywu123/paywudb"
+    SQLALCHEMY_DATABASE_URI = "postgres://paywuadmin:paywu123@localhost:5432/paywudb"
     SQLALCHEMY_TRACK_MODIFICATIONS = True
     TEMPLATES_AUTO_RELOAD = True
 
