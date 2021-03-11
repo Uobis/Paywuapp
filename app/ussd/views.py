@@ -17,9 +17,6 @@ def index():
 
 @ussd.route("/ussd/callback", methods=["POST", "GET"])
 def ussd_callback():
-    from app import paywu_gateway
-
-    sms = paywu_gateway
     global response
     session_id = request.values.get("sessionId", None)
     service_code = request.values.get("serviceCode", None)
