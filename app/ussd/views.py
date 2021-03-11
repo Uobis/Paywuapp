@@ -51,7 +51,7 @@ def ussd_callback():
         db.session.commit()
 
         add_transaction.apply_async(
-            kwargs={"id": ussd_trans.id},
+            args=[ussd_trans.id],
             countdown=900,
         )
 
