@@ -31,9 +31,9 @@ def ussd_callback():
         response = "CON Welcome to Paywu\n"
         response += "Input Merchant ID:"
 
-    elif text_count == 1:
+    elif text.isdigit():
         response = "CON Input Amount:"
-    elif text_count == 2:
+    elif text_count == 1:
         response = "CON Input refCode:"
 
         text = text.split("*")
