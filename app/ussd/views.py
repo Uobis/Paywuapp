@@ -55,6 +55,8 @@ def ussd_callback():
             countdown=900,
         )
 
+        response = "END Transaction Recorded"
+
         # response = "END Your phone number is {}".format(phone_number)
     # elif text == "3":
     #     try:
