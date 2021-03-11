@@ -1,8 +1,9 @@
-from flask import request, make_response
+from flask import make_response, request
+
+from ..models import USSD_Transactions, db
 from . import ussd
 from .base_menu import Menu
 from .tasks import add_transaction
-from ..models import db, USSD_Transactions
 
 response = ""
 
@@ -52,9 +53,7 @@ def ussd_callback():
         db.session.commit()
 
         add_transaction.apply_async(
-            kwargs={"id": USSD_Transactions.query.get(
-                USSD_Transactions.id=ussd_trans.id
-            )},
+            kwargs={"id": USSD_Transactions.query.get(ussd_trans.id)},
             countdown=900,
         )
 

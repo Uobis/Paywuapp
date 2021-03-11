@@ -1,29 +1,50 @@
 import os
 
 from flask import Flask
-from flask_migrate import Migrate
 from flask_sqlalchemy import SQLAlchemy
-from .ussd import ussd
+
 from .service import PaywuGateway
-from celery import Celery
+from config import config, Config
 
 
-app = Flask(__name__)
-app.config.from_object("config.DevelopmentConfig")
-app.register_blueprint(ussd)
+db = SQLAlchemy()
 
-db = SQLAlchemy(app)
-migrate = Migrate(app, db)
 
-celery = Celery(
-    __name__,
-    broker=app.config["CELERY_BROKER_URL"],
-    backend=app.config["CELERY_RESULT_BACKEND"],
-)
-celery.conf.update(app.config)
+def create_celery():
+    from celery import Celery
 
-paywu_gateway = PaywuGateway(app=app)
+    celery = Celery(
+        __name__,
+        broker=Config.CELERY_BROKER_URL,
+        backend=Config.CELERY_RESULT_BACKEND,
+    )
+    return celery
 
-# @login_manager.user_loader
-# def load_user(id):
-#     return User.query.filter_by(id=id).first()
+
+celery = create_celery()
+
+
+def create_app(configuration):
+    app = Flask(__name__)
+    app.config.from_object(config[configuration])
+    config[configuration].init_app(app)
+
+    db.init_app(app)
+
+    celery.conf.update(app.config)
+
+    class ContextTask(celery.Task):
+        def __call__(self, *args, **kwargs):
+            with app.app_context():
+                return self.run(*args, **kwargs)
+
+    celery.Task = ContextTask
+
+    from .ussd import ussd
+
+    app.register_blueprint(ussd)
+
+    return app
+
+
+# paywu_gateway = PaywuGateway(app=app)

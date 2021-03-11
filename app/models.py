@@ -1,6 +1,7 @@
 import enum
 from datetime import datetime
-from app import db
+
+from . import db
 
 
 class STATUS_CHOICES(enum.Enum):
@@ -23,16 +24,6 @@ class USSD_Transactions(db.Model):
 
     created = db.Column(db.DateTime, default=datetime.utcnow)
     updated = db.Column(db.DateTime, default=datetime.utcnow, onupdate=datetime.utcnow)
-
-    @staticmethod
-    def verify_reset_password_token(token):
-        try:
-            id = jwt.decode(token, app.config["SECRET_KEY"], algorithms=["HS256"])[
-                "reset_password"
-            ]
-        except:
-            return
-        return User.query.get(id)
 
     def __repr__(self):
         return f"<User {self.merchant_id}>"

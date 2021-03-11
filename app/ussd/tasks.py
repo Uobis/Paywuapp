@@ -1,14 +1,10 @@
-import os
-import time
 from .. import celery
-from ..models import db, USSD_Transactions, STATUS_CHOICES
+from ..models import STATUS_CHOICES, USSD_Transactions, db
 
 
 @celery.task
 def add_transaction(id):
-    ussd_trans = USSD_Transactions.query.get(
-        USSD_Transactions.id=id
-    )
+    ussd_trans = USSD_Transactions.query.get(id)
     ussd_trans.status = STATUS_CHOICES.failed
     db.session.commit()
     return True

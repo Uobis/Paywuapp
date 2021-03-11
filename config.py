@@ -25,6 +25,10 @@ class Config:
 
     APP_NAME = "paywu"
 
+    @classmethod
+    def init_app(cls, app):
+        pass
+
 
 class DevelopmentConfig(Config):
     """
