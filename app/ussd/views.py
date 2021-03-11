@@ -24,6 +24,7 @@ def ussd_callback():
     text = request.values.get("text", "default")
 
     text_count = text.count("*")
+    # 3698*1000*5858
 
     # ussd logic
     if text == "":
@@ -35,7 +36,7 @@ def ussd_callback():
         response = "CON Input Amount:"
     elif text_count == 1:
         response = "CON Input refCode:"
-
+    elif text_count == 2:
         text = text.split("*")
         merchant_id = text[0]
         amount = text[1]
