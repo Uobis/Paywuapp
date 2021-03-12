@@ -13,14 +13,13 @@ class Config:
     CSRF_ENABLED = True
 
     SECRET_KEY = b"\x1c\x92\x07\xc8\xea\xbbA\xa1\x04\xac\xa4I\xc5\x11\x9b\xb1"
-    CSRF_ENABLED = True
-    SQLALCHEMY_DATABASE_URI = "postgres://paywuadmin:paywu123@localhost:5432/paywudb"
     SQLALCHEMY_TRACK_MODIFICATIONS = True
-    TEMPLATES_AUTO_RELOAD = True
 
     CELERY_BROKER_URL = "redis://localhost:6379"
     CELERY_RESULT_BACKEND = "redis://localhost:6379"
-    CELERY_IMPORTS = ("app.ussd.tasks.add_transaction",)
+    CELERY_IMPORTS = [
+        "app.ussd.tasks",
+    ]
 
     AFRI_TALK_USER = None
     AFRI_TALK_KEY = None
@@ -54,6 +53,7 @@ class ProductionConfig(Config):
     """Production Mode configuration"""
 
     ENV = "production"
+    SQLALCHEMY_DATABASE_URI = "postgres://paywuadmin:paywu123@localhost:5432/paywudb"
 
     AFRI_TALK_USER = "sandbox"
     AFRI_TALK_KEY = "3f1bc65b1c29fa85a02c1f99ad4bcc52c1c1c2178aadfbb1d24e8510c94c52e6"

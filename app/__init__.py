@@ -11,17 +11,19 @@ db = SQLAlchemy()
 
 
 def create_celery():
-    from celery import Celery
+    from celery import Celery, current_app
 
     celery = Celery(
         __name__,
         broker=Config.CELERY_BROKER_URL,
         backend=Config.CELERY_RESULT_BACKEND,
     )
+    current_app.loader.import_default_modules()
     return celery
 
 
 celery = create_celery()
+celery.autodiscover_tasks(["app.ussd.tasks"], force=True)
 
 
 def create_app(configuration):
