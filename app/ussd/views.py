@@ -81,6 +81,11 @@ def ussd_callback():
     return response
 
 
+@ussd.route("/sms/callback", methods=["POST", "GET"])
+def sms_callback():
+    pass
+
+
 @ussd.route("/bank/callback", methods=["POST", "GET"])
 def bank_callback():
     pass
