@@ -20,7 +20,7 @@ class Config:
 
     CELERY_BROKER_URL = "redis://localhost:6379"
     CELERY_RESULT_BACKEND = "redis://localhost:6379"
-    CELERY_IMPORTS = ("app.ussd.tasks",)
+    CELERY_IMPORTS = ("app.ussd.tasks.add_transaction",)
 
     AFRI_TALK_USER = None
     AFRI_TALK_KEY = None
