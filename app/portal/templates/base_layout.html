@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}{% endblock  %}
+    </title>
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/index.css') }}">
+    {% block style %}{% endblock  %}
+</head>
+
+<body>
+
+    {% block content %}{% endblock  %}
+
+
+    <script src="{{ url_for('static', filename='vendor/js/jquery-3.3.1.min.js') }}"></script>
+    {% block script %}{% endblock  %}
+    <script>
+        $(document).ready(function () {
+            $('.form_input>input,.form_input>textarea').each(function () {
+                if ($(this).val() !== "") {
+                    $(this).addClass('has-val');
+                }
+            })
+
+            $('.form_input>input[type="password"]').each(function () {
+                if ($(this).val() != "") {
+                    $(this).prev().fadeIn()
+                } else {
+                    $(this).prev().fadeOut()
+                    $(this).removeClass('has-val');
+                }
+            })
+
+            if ($('.flash-message').html() !== "") {
+                var _timeout;
+                $('.flash-message').fadeIn();
+                $('.flash-message-content').each(function () {
+                    if ($(this).find('span').html() === "error") {
+                        $(this).find('span').parent().css({
+                            'background-color': '#c80000'
+                        })
+                    } else if ($(this).find('span').html() === "info") {
+                        $(this).find('span').parent().css({
+                            'background-color': '#05386b'
+                        })
+                    } else if ($(this).find('span').html() === "success") {
+                        $(this).find('span').parent().css({
+                            'background-color': '#04aa60'
+                        })
+                    }
+                })
+                setTimeout(() => {
+                    $('.flash-message').fadeOut();
+                }, 10000);
+            }
+
+            $('.form_input').each(function () {
+                if ($(this).children().hasClass('error')) {
+                    $(this).children('input').css({
+                        'border-color': '#c80000'
+                    })
+                    $(this).children('.form_input-focus').css({
+                        'color': '#c80000'
+                    })
+                }
+            })
+        });
+    </script>
+    <script src="{{ url_for('static', filename='js/index.js') }}"></script>
+</body>
+
+</html>

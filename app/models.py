@@ -14,7 +14,7 @@ class USSD_Transactions(db.Model):
     __tablename__ = "transactions"
 
     id = db.Column(db.Integer, primary_key=True)
-
+    request_ref = db.Column(db.String(120), index=True, nullable=False)
     merchant_id = db.Column(db.String(120), index=True, nullable=False)
     amount = db.Column(db.Float, index=True, nullable=False)
     refCode = db.Column(db.Unicode, index=True, nullable=False)

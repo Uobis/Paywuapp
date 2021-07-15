@@ -1,0 +1,200 @@
+.dashboard {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+
+    >section:not(:last-child) {
+        margin-bottom: 2rem;
+    }
+
+    >section:first-child {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+
+        >div:first-child {
+            form {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-evenly;
+
+                .form_input {
+                    margin-bottom: 1rem;
+                }
+
+                .btn {
+                    margin: unset;
+                    margin-left: auto;
+                }
+            }
+        }
+
+        >div:last-child {
+
+            &.table {
+                >div {
+                    flex-direction: row;
+                    height: 100%;
+                }
+
+                .table_head {
+                    width: 50%;
+                }
+
+                .table_body {
+                    width: 100%;
+
+                }
+
+                .table_body>div {
+                    height: 100%;
+
+                    >div {
+                        text-align: right;
+
+                    }
+                }
+
+            }
+        }
+    }
+
+    >section:last-child {
+        padding: 2rem;
+
+        >div:first-child {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+
+
+            @media (max-width:$bp-md) {
+                flex-direction: column;
+                align-items: unset;
+                justify-content: unset;
+            }
+
+            >div {
+                display: flex;
+                flex-direction: column;
+
+                &:first-child {
+                    justify-content: space-between;
+                    height: 9.5rem;
+
+                    >div:first-child {
+
+                        .btn {
+                            width: 4rem;
+                            height: 4rem;
+                            padding: .5rem;
+                            border-radius: 10rem;
+                            margin: unset;
+                            box-shadow: unset;
+
+                            font-weight: 500;
+                            border: .2rem solid $--color-primary-light;
+                            background-color: $--color-primary-light;
+                            color: $--color-primary;
+
+                            svg {
+                                fill: currentColor;
+                            }
+
+                            &:hover {
+                                color: #fff;
+                                border-color: $--color-primary;
+                                background-color: $--color-primary;
+                            }
+
+                            &:first-child {
+                                margin-right: 1rem;
+                            }
+
+                            svg {
+                                width: 3.5rem;
+                                height: 3.5rem;
+                                margin: unset;
+                            }
+                        }
+                    }
+
+                    >div:last-child {
+                        margin: unset;
+
+                        >select {
+                            padding: .5rem;
+                        }
+                    }
+                }
+
+                &:last-child {
+                    .search {
+                        margin-bottom: 1rem;
+
+                        @media (max-width:$bp-md) {
+                            margin-right: unset;
+                            margin-bottom: 2rem;
+                        }
+
+                        &_input {
+                            width: 100%;
+
+                            &:focus {
+                                width: 100%;
+                            }
+                        }
+                    }
+
+                    >div.search_by_date {
+                        display: flex;
+                        align-items: center;
+
+                        @media (max-width: $bp-md) {
+                            width: 100%;
+
+                            &:not(.search) {
+                                display: grid;
+                                grid-template-columns: repeat(2, 1fr);
+                                gap: 1rem;
+                            }
+                        }
+
+                        >.form_input {
+                            margin-bottom: unset;
+
+
+                            >input {
+                                padding: .5rem;
+
+                            }
+
+                            &:not(:last-child) {
+                                margin-right: 2rem;
+
+                                @media (max-width: $bp-md) {
+                                    margin-right: unset;
+                                }
+                            }
+
+                            label {
+                                font-weight: bold;
+                            }
+                        }
+                    }
+                }
+
+
+            }
+        }
+
+        .table {
+
+            &_head,
+            &_body>div {
+                grid-template-columns: 5rem repeat(6, 1fr);
+            }
+        }
+    }
+}

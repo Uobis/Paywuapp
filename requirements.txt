@@ -1,7 +1,12 @@
 flask
 africastalking
 flask-sqlalchemy
-psycopg2
+# psycopg2
 Flask-Migrate
+Flask-Mail
+Flask-Login
+Flask-Scss
+Flask-WTF
 celery
+pyDes==2.0.1
 redis

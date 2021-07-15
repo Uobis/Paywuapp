@@ -2,12 +2,25 @@ import africastalking
 
 
 class PaywuGateway:
-    def __init__(self, app):
-        self.user_name = app.config["AFRI_TALK_USER"]
-        self.api_key = app.config["AFRI_TALK_KEY"]
+    def __init__(self, config):
+        user_name = config.AFRI_TALK_USER
+        api_key = config.AFRI_TALK_KEY
 
-    def send_sms(self, message, phonenumber):
-        sms = africastalking.SMSService(username=self.user_name, api_key=self.api_key)
+        self.sms = africastalking.SMSService(username=user_name, api_key=api_key)
 
-        response = sms.send(message=message, recipients=[phonenumber], sender_id=None)
-        print(response)
+    def send(self, message, recipient):
+        response = self.sms.send(
+            message=message, recipients=[recipient], sender_id=None
+        )
+
+        return response
+
+    def send_sms(self, message, recipient):
+        response = self.send(message=message, recipient=recipient, sender_id=None)
+
+        return response
+
+    def send_otp(self, recipient, otp):
+        response = self.send("PaywuOTP", recipient=recipient, message=f"OTP code {otp}")
+
+        return response
