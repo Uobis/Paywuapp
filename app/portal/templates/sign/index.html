@@ -1,0 +1,44 @@
+{% extends 'sign_layout.html' %}
+
+{% block title %}Sign In | Paywu Portal{% endblock  %}
+
+{% block sign_view %}
+<form class="card form form-sign" action="{{ url_for('portal.portal_home') }}" method="post">
+
+    <div class="card_body">
+        <h1>
+            Paywu Portal
+        </h1>
+
+        {{ form.hidden_tag() }}
+
+        <div class="form_input">
+            <span class="pass_show">
+                <svg>
+                    <use xlink:href="{{ url_for('static', filename='svg/sprite.svg') }}#icon-show"></use>
+                </svg>
+            </span>
+            {% for error in form.password.errors %}
+            <span class="error">[{{error}}]</span>
+            {% endfor %}
+            {{form.password}}
+            <span class="form_input-focus">
+                <svg>
+                    <use xlink:href="{{ url_for('static', filename='svg/sprite.svg') }}#icon-key"></use>
+                </svg>
+                <label for="{{form.password.id_for_label}}">{{form.password.label}}<span class="red">*</span></label>
+            </span>
+        </div>
+
+
+        <!--signin btn-->
+        <button class="btn btn-main" type="submit">Sign In
+            <svg>
+                <use xlink:href="{{ url_for('static', filename='svg/sprite.svg') }}#icon-login"></use>
+            </svg>
+        </button>
+        <!--/signin btn-->
+    </div>
+
+</form>
+{% endblock  %}

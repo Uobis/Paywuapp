@@ -1,0 +1,171 @@
+{% extends 'base_layout.html' %}
+{% block title %}Dashboard | Paywu Portal{% endblock  %}
+
+{% block content %}
+<main class="dashboard">
+    <section>
+        <div class="card">
+            <div class="card_head">
+                <h5>Input Customer Account Number</h5>
+            </div>
+            <div class="card_body">
+                <form action="">
+                    <div class="form_input">
+                        {% for error in form.acc_num.errors %}
+                        <span class="error">[{{error}}]</span>
+                        {% endfor %}
+                        {{form.acc_num}}
+                        <span class="form_input-focus">
+                            <svg>
+                                <use
+                                    xlink:href="{{ url_for('static', filename='svg/sprite.svg') }}#icon-account_number">
+                                </use>
+                            </svg>
+                            <label for="{{form.acc_num.id_for_label}}">{{form.acc_num.label}}<span
+                                    class="red">*</span></label>
+                        </span>
+                    </div>
+
+                    <button class="btn btn-main">
+                        <svg>
+                            <use xlink:href="{{ url_for('static', filename='svg/sprite.svg') }}#icon-search"></use>
+                        </svg>
+                        Search
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <div class="card table">
+            <div class="card_body">
+                <div class="table_head">
+                    <div>
+                        Name
+                    </div>
+                    <div>
+                        Account Number
+                    </div>
+                    <div>
+                        Phonenumber
+                    </div>
+                </div>
+                <div class="table_body">
+                    <div>
+                        <div>Ndife Onyedika Michael</div>
+                        <div>3109304578</div>
+                        <div>08086084762</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="card table">
+        <div class="search_layout">
+            <div>
+                <div>
+                    <button class="trigger btn btn-main" data-target="exportFile" data-value="csv">
+                        <svg>
+                            <use xlink:href="{{ url_for('static', filename='svg/sprite.svg') }}#icon-csv"></use>
+                        </svg>
+                    </button>
+                    <button class="trigger btn btn-main" data-target="exportFile" data-value="pdf">
+                        <svg>
+                            <use xlink:href="{{ url_for('static', filename='svg/sprite.svg') }}#icon-pdf"></use>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="form_input">
+                    <select name="" id="">
+                        <option disabled selected>Sort By</option>
+                        <option value="failed">Failed</option>
+                        <option value="success">Success</option>
+                        <option value="pending">Pending</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <div class="search">
+                    <input type="search" name="search_data" class="search_input" placeholder="Search Records">
+                    <button>
+                        <svg>
+                            <use xlink:href="{{ url_for('static', filename='svg/sprite.svg') }}#icon-search"></use>
+                        </svg>
+                    </button>
+                </div>
+                <div class="search_by_date">
+                    <div class="form_input">
+                        <label for="from_date">From:</label>
+                        <input type="date" name="" id="from_date">
+                    </div>
+                    <div class="form_input">
+                        <label for="to_date">To:</label>
+                        <input type="date" name="" id="to_date">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div>
+            <div class="table_head">
+                <div>#</div>
+                <div>Merchant ID</div>
+                <div>Amount</div>
+                <div>RefCode Used</div>
+                <div>Status</div>
+                <div>Date Created</div>
+                <div>Date Updated</div>
+            </div>
+            <div class="table_body">
+                <div>
+                    <div>1</div>
+                    <div>Account</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                </div>
+                <div>
+                    <div>1</div>
+                    <div>Account</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                </div>
+                <div>
+                    <div>1</div>
+                    <div> Account</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                </div>
+                <div>
+                    <div>1</div>
+                    <div> Account</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                </div>
+                <div>
+                    <div>1</div>
+                    <div> Account</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                    <div>A</div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock  %}

@@ -1,0 +1,402 @@
+.signreg {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow-y: auto;
+    background-color: $--color-grey-dark-bg;
+
+    section {
+        height: calc(100vh - 4rem);
+        display: flex;
+        flex-direction: column;
+        -moz-flex-direction: column;
+        align-items: center;
+        justify-content: center;
+
+        .form_input {
+            margin-bottom: unset;
+        }
+    }
+
+    >footer {
+        height: 4rem;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    -moz-flex-direction: column;
+
+    h1 {
+        font-size: 4rem;
+        text-align: center;
+        margin-bottom: 2rem;
+
+        >span {
+            display: block;
+
+            &:first-child {
+                margin-bottom: .5rem;
+            }
+
+            &:last-child {}
+        }
+    }
+
+    &-sign {
+        width: 35rem;
+    }
+
+    &-flex {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        align-items: center;
+        margin-bottom: 2.5rem;
+
+        &_mini {
+            display: flex;
+            flex-direction: column;
+            -moz-flex-direction: column;
+
+            .btn {
+                font-weight: bold;
+                margin: unset;
+
+                &:not(:last-child) {
+                    margin-bottom: 1rem;
+                }
+
+                svg {
+                    margin-right: 1rem;
+                }
+            }
+        }
+
+        .form_input {
+            margin-bottom: 0;
+        }
+
+        .errorlist {
+            bottom: -2rem;
+        }
+
+        @media (max-width: $bp-sm) {
+            grid-template-columns: none;
+            grid-template-rows: min-content min-content;
+            gap: 0;
+            margin-bottom: 0;
+
+            .form_input {
+                margin-bottom: 1.5rem;
+            }
+
+        }
+
+    }
+
+    &_input {
+        width: 100%;
+        position: relative;
+        margin-bottom: 2rem;
+
+
+        &-disabled {
+            cursor: not-allowed;
+
+            >input,
+            select,
+            textarea {
+                border-color: $--color-grey-dark-2 !important;
+            }
+
+            >.form_input-focus {
+                color: $--color-grey-dark;
+            }
+        }
+
+        &-focus {
+            position: absolute;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            top: 0;
+            left: 0;
+            pointer-events: none;
+            padding: 1rem;
+            transition: top .3s linear;
+            color: $--color-grey-dark-2;
+
+            >label {
+                font-size: inherit;
+                color: currentColor;
+            }
+
+            >svg {
+                margin-right: 1rem;
+                width: 2rem;
+                height: 2rem;
+                fill: currentColor;
+            }
+
+        }
+
+        @media (max-width: $bp-sm) {
+            margin-bottom: 1.5rem;
+
+        }
+
+        >p {
+            color: $--color-grey-dark-3;
+            display: flex;
+            align-items: center;
+            border: .1rem solid $--color-grey-dark-2;
+            border-radius: $--border-radius;
+            width: 100%;
+            padding: 1rem;
+
+            svg {
+                width: 2rem;
+                height: 2rem;
+                fill: currentColor;
+                margin-right: 1rem;
+            }
+        }
+
+
+        &-mini {
+
+            >input,
+            >select,
+            >textarea {
+                padding: .5rem !important;
+
+            }
+        }
+
+        >input[type='password'] {
+            padding-right: 4rem;
+        }
+
+        >input[type='file'] {
+            padding: .5rem;
+        }
+
+
+
+        >input,
+        >select,
+        >textarea {
+            border: .1rem solid $--color-grey-dark-2;
+            border-radius: $--border-radius;
+            font-size: inherit;
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            font-family: inherit;
+            background-color: #fff;
+
+            &::placeholder {
+                display: none;
+            }
+
+            &:focus {
+                outline: none;
+
+                &:invalid {
+                    border-color: $--color-danger;
+
+                    +.form_input-focus {
+                        color: $--color-danger;
+                    }
+                }
+
+                &:valid {
+                    border-color: $--color-primary;
+
+                    +.form_input-focus {
+                        color: $--color-primary;
+                    }
+                }
+            }
+
+            &:focus+.form_input-focus {
+                border-radius: $--border-radius;
+                background-color: #fff;
+                top: -1rem;
+                left: 1rem;
+                height: auto;
+                padding: 0 .5rem;
+
+                transform: scale(.9);
+
+                @media (max-width: $bp-sm) {
+                    top: -1.2rem;
+                }
+
+                >svg {
+                    position: unset;
+                    padding-left: unset;
+                    width: 1.7rem;
+                    height: 1.7rem;
+                }
+
+                >label {
+                    position: unset;
+                    font-size: 1.4rem;
+                }
+            }
+
+        }
+
+        >textarea {
+            &+.form_input-focus {
+                height: auto;
+            }
+        }
+
+        >.pass_show {
+            display: none;
+            position: absolute;
+            top: .8rem;
+            right: 1rem;
+            cursor: pointer;
+            width: 2.5rem;
+            height: 2.5rem;
+
+            svg {
+                width: 100%;
+                height: 100%;
+
+                fill: $--color-grey-dark-2
+            }
+        }
+
+    }
+}
+
+.form_input.form-flex {
+    border-radius: $--border-radius;
+    padding: .7rem;
+    border: .1rem solid $--color-grey-dark-2 !important;
+}
+
+.link {
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+
+    svg {
+        margin-right: 0.5rem;
+        width: 2rem;
+        height: 2rem;
+        fill: currentColor;
+        transition: all .5s;
+    }
+
+    &-btn {
+        width: 4rem;
+        height: 4rem;
+        justify-content: center;
+        border-radius: 10rem;
+        background-color: $--color-primary-light;
+
+        svg {
+            margin-right: unset;
+            fill: $--color-primary-dark;
+        }
+
+        &:hover {
+            background-color: $--color-primary;
+
+            svg {
+                fill: #fff;
+            }
+        }
+    }
+
+    &:link,
+    &:visited {
+        font-weight: 500;
+        text-decoration: none;
+        transition: all .5s;
+        color: $--color-primary;
+    }
+
+    &:hover,
+    &:active {
+        color: $--color-primary-dark;
+    }
+}
+
+
+.no_account {
+    margin: 1rem 0;
+    font-size: 1.2rem;
+    color: $--color-grey-dark-2;
+    display: grid;
+    grid-template-columns: 1fr max-content 1fr;
+    align-items: center;
+    grid-gap: 1.5rem;
+
+    @media (max-width: $bp-sm) {
+        margin-bottom: 1rem;
+    }
+
+    &::before,
+    &::after {
+        content: "";
+        width: 100%;
+        height: .1rem;
+        background-color: currentColor;
+    }
+}
+
+.errorlist {
+    font-size: 1rem;
+    list-style: none;
+    position: absolute;
+    bottom: -1rem;
+    left: 0;
+    color: $--color-danger;
+    font-weight: 600;
+    display: block !important;
+    padding: 0;
+}
+
+
+.form_input>input.has-val+.form_input-focus,
+.form_input>textarea.has-val+.form_input-focus {
+    background-color: #fff;
+    top: -1rem;
+    left: 1rem;
+    height: auto;
+    padding: 0 .5rem;
+    transform: scale(.9);
+
+
+
+
+    @media (max-width: $bp-sm) {
+        top: -1.2rem;
+    }
+
+    >svg {
+        position: unset;
+        padding-left: unset;
+        width: 1.7rem;
+        height: 1.7rem;
+    }
+
+    >label {
+        position: unset;
+        font-size: 1.4rem;
+    }
+}

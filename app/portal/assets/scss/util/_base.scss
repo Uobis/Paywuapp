@@ -1,0 +1,214 @@
+// @import url(https://fonts.googleapis.com/css?family=Varela+Round);
+@font-face {
+    font-family: Varela_Round;
+    src: url(/static/font/VarelaRound-Regular.ttf);
+}
+
+$--color-primary: #0556f3;
+$--color-primary-light: #9BBBFA;
+$--color-primary-dark: #03338f;
+
+$--color-secondary: #ff9d00;
+$--color-secondary-light: #ffeac8;
+
+$--color-tertiary: #6501e5;
+$--color-tertiary-light: #c89eff;
+$--color-tertiary-dark: #4F03AF;
+
+$--color-danger: #ff1e00;
+$--color-danger-light: #fdaea3;
+
+$--color-grey-light: #f6f6f6;
+$--color-grey-light-2: #d9d9d9;
+$--color-grey-dark: #AAB8C2;
+$--color-grey-dark-2: #657786;
+$--color-grey-dark-3: #14171A;
+$--color-grey-dark-bg: #f3f3f3;
+
+
+$--border-radius: .4rem;
+$--border-radius-2: .8rem;
+
+$bp-xl: 75em; //1200px
+$bp-lg: 62.5em; //1000px
+$bp-md: 50em; //800px
+$bp-sm: 37.5em; //600px
+$bp-xs: 25em; //400px
+
+
+*,
+*::after,
+*::before {
+    margin: 0;
+    box-sizing: inherit;
+    -webkit-font-smoothing: antialiased;
+    line-height: 1;
+    font-weight: 400;
+
+    &:not(ul, ol) {
+        padding: 0;
+    }
+}
+
+html {
+    font-size: 62.5%;
+    box-sizing: border-box;
+
+    @media (max-width: $bp-xl) {
+        font-size: 50%;
+    }
+}
+
+body {
+    color: $--color-grey-dark-3;
+    font-family: Varela_Round;
+    font-size: 1.5rem;
+    position: relative;
+}
+
+.body,
+.body-2 {
+    position: fixed;
+    height: 100vh;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 200;
+    background: rgba(0, 0, 0, .6);
+    opacity: 0;
+    visibility: hidden;
+    transform: scale(1.1);
+}
+
+.body-3 {
+    background: rgba(0, 0, 0, .6);
+    height: 100vh;
+    top: 12rem;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    display: none;
+    position: fixed;
+    z-index: 1;
+}
+
+.container {
+    padding: 0 10rem;
+
+    @media only screen and (max-width: $bp-md) {
+        padding: 0 5rem;
+    }
+
+    @media only screen and (max-width: $bp-sm) {
+        padding: 0 2rem;
+    }
+
+}
+
+strong {
+    font-weight: bold !important;
+}
+
+input,
+select {
+    color: inherit;
+    background-color: #fff;
+}
+
+
+input[type="radio"],
+input[type="checkbox"] {
+    display: none;
+}
+
+.bg-primary {
+    background-color: $--color-primary;
+}
+
+.red {
+    color: $--color-danger;
+}
+
+.none {
+    display: none !important;
+}
+
+.toggle {}
+
+.status {
+    border-radius: 10rem;
+    padding: .5rem;
+    display: flex;
+    align-items: center;
+    width: fit-content;
+    width: -moz-fit-content;
+
+    &::before {
+        content: "";
+        display: block;
+        width: 1.5rem;
+        height: 1.5rem;
+        border-radius: 10rem;
+        margin-right: 1rem;
+    }
+
+    &-confirmed {
+        color: $--color-grey-dark-3;
+        background-color: $--color-tertiary-light;
+
+        &::before {
+            background-color: $--color-tertiary;
+        }
+
+    }
+
+    &-success {
+        color: $--color-grey-dark-3;
+        background-color: $--color-primary-light;
+
+        &::before {
+            background-color: $--color-primary;
+        }
+
+    }
+
+    &-pending {
+        color: $--color-grey-dark-3;
+        background-color: $--color-secondary-light;
+
+        &::before {
+            background-color: $--color-secondary;
+        }
+    }
+
+    &-failed {
+        color: $--color-grey-dark-3;
+        background-color: $--color-danger-light;
+
+        &::before {
+            background-color: $--color-danger;
+        }
+    }
+}
+
+button {
+    border: none;
+    outline: none;
+}
+
+canvas {
+    width: 100% !important;
+}
+
+.rotate_drp {
+    background-color: $--color-primary !important;
+
+    svg {
+        transform: rotate(180deg);
+        fill: #fff !important;
+    }
+}
